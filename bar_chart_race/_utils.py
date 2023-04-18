@@ -112,9 +112,8 @@ def prepare_wide_data(df, orientation='h', sort='desc', n_bars=None, interpolate
     
     df_values = df_values.set_index(df_values.columns[0])
     if compute_ranks:
-        df_ranks = df_values.rank(axis=1, method='first', ascending=False).clip(upper=n_bars + 1)
-        if (sort == 'desc' and orientation == 'h') or (sort == 'asc' and orientation == 'v'):
-            df_ranks = n_bars + 1 - df_ranks
+        df_ranks = df_values.rank(axis=1, method='first', ascending=sort=='asc').clip(upper=n_bars + 1)
+        df_ranks = n_bars + 1 - df_ranks
         df_ranks = df_ranks.interpolate()
     
     df_values = df_values.interpolate()
