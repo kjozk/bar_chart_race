@@ -454,6 +454,7 @@ class _BarChartRace(CommonChart):
     def anim_func(self, i):
         if i is None:
             return
+        print(f'Animation.save: Progress: {(i + 1) / len(self.df_values):.1%}', end='\r')
         ax = self.fig.axes[0]
         for bar in ax.containers:
             bar.remove()
